@@ -27,9 +27,16 @@ import matlab.io.hdfeos.*
     gd.detach(gridID);
     gd.close(gfid);
 
+    ndvi1(ndvi1<0)=nan;
+    evi1(evi1<0)=nan;
+
+    ndvi2(ndvi2<0)=nan;
+    evi2(evi2<0)=nan;
 
     ndvi = double([ndvi1 ndvi2]).*0.0001;
     evi = double([evi1 evi2]);
+
+      
     calidad = double([calidad1 calidad2]);
     disponibilidad = double([disponibilidad1 disponibilidad2]);
 end
