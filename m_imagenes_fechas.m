@@ -1,9 +1,9 @@
 function img_fechas = m_imagenes_fechas(dir_data)
-disp("Obteniendo información de archivos sobre fechas");
+disp(">>>>> Obteniendo información de archivos sobre fechas ... ");
 %Lista de archivos HDF del completas para analizar la información 
 lista_archivos = dir(dir_data+'MOD13A2\061\MOD13A2.A*.hdf');
 num_archivos = length(lista_archivos);
-disp("Analizando "+num_archivos+" archivos");
+disp(">>>>> Analizando "+num_archivos+" archivos");
 i=1;
 
 %declaracion de variables
@@ -32,5 +32,5 @@ if(num_archivos > 0)
 
     img_fechas = table(idx',diaj',dia',mes',estacion',anio',v6',v7','VariableNames',["idx","diaj","dia","mes","estacion","anio","v6","v7"]);
 else
-    warnig("No hay imagenes disponibles");
+    warnig(">>>>> No hay imagenes disponibles");
 end
