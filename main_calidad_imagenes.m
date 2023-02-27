@@ -69,7 +69,6 @@ arr_calidad_mes = zeros(1,12);
 arr_dias_por_mes = zeros(1,12);
 
 %%arr_fecha = zeros(1,filas);
-fehca = "";
 
 for i=1:filas
     disp("Analizando "+i+" de "+filas);
@@ -188,8 +187,4 @@ ylabel('% de calidad')
 ylim([80 100]);
 xticks(1:12)
 xticklabels(["Enero" "Febrero"  "Marzo" "Abril" "Mayo" "Junio" "Julio" "Agosto" "Septiembre" "Octubre" "Noviembre" "Diciembre"])
-
-
-
-
 

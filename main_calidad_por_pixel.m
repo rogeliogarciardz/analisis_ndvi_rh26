@@ -124,3 +124,19 @@ c = colorbar;
 c.Label.String = "Disponibilidad";
 m_dibujarOtrasAreas(dir_data,"Calidad x pixel");
 m_northarrow(-101,23,.4,'type',2);
+
+
+%% hostograma y 1a derivada
+
+x=1:100;
+h1=histogram(arr_ndvi,100);
+y = h1.Values;
+
+dc = f_dcomb(x,y);
+
+plot(x,y,"b",x,dc,"k-");
+
+title('1da derivada histograma')
+xlabel('x')
+ylabel("f(x)");
+legend(["Histograma" "Derivada"],"Location","north");
