@@ -102,10 +102,11 @@ for i=1:filas
     end
     
 end
+map_disponibilidad=m_mean_3dpp(arr_disponibilidad);
 
-map_disponibilidad = permute(arr_disponibilidad,[1 3 2]);
-map_disponibilidad = mean(map_disponibilidad,2,'omitnan');
-map_disponibilidad = reshape(map_disponibilidad,[ndvi_tam(1),ndvi_tam(2)]);
+%map_disponibilidad = permute(arr_disponibilidad,[1 3 2]);
+%map_disponibilidad = mean(map_disponibilidad,2,'omitnan');
+%map_disponibilidad = reshape(map_disponibilidad,[ndvi_tam(1),ndvi_tam(2)]);
 
 map_disponibilidad(map_disponibilidad>0.5)=nan;
 
