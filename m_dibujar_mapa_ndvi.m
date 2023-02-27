@@ -16,7 +16,7 @@ function m_dibujar_mapa_ndvi(lon_mapa,lat_mapa,lon,lat,ndvi,titulo)
     colorbar('eastoutside');
     c = colorbar;
     c.Label.String = "NDVI";
-    %clim([-3000 9000]);
+    clim([0 1]);
     %dibuja el recuadro del mapa
     m_grid('linestyle','none','tickdir','out','linewidth',2);
     title(titulo);
