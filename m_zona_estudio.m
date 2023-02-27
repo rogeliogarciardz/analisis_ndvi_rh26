@@ -1,6 +1,6 @@
 function [lat,lon,ndvi_test] = m_zona_estudio(dir_data,coord_1k_v6_inicio,coord_1k_v6_tam,coord_1k_v7_inicio,coord_1k_v7_tam)
 import matlab.io.hdfeos.*
-disp("Obteniendo la zona de estudio");
+disp(">>>>> Obteniendo la zona de estudio");
 
 %Lista de archivos HDF del 2022 para analizar la información y obtener las
 %matrices de latitud y longitud del área a anlizar h08v06 y h08v07
@@ -10,7 +10,7 @@ num_archivos = length(lista_archivos);
 
 if(num_archivos > 0)
     %% Recuperar la información
-    disp("Analizando "+num_archivos+" archivos");
+    disp(">>>>> Analizando "+num_archivos+" archivos");
     
     % Abrir primer h08v06 archivo hdf para obtener las matrices de latitud y
     % longitud. Despues abrir el segundo archvio h08v07 y unir al primero
