@@ -121,7 +121,7 @@ for i=1:filas
     arr_fecha(i) = datetime( fecha,'InputFormat','dd/MM/yyyy');
     if debug_dibujar_mapa_ndvi == true 
         % dibujar el mapa
-        m_dibujar_mapa_ndvi(lon_proyeccion,lat_proyeccion,lon,lat,ndvi,"RH 26 ("+img_fechas.dia(i)+"/"+img_fechas.mes(i)+"/"+img_fechas.anio(i)+") C: "+calidad);
+        m_dibujar_mapa_ndvi(lon_proyeccion,lat_proyeccion,lon,lat,ndvi,"RH 26 ("+img_fechas.dia(i)+"/"+img_fechas.mes(i)+"/"+img_fechas.anio(i)+") C: "+calidad,0);
         m_dibujarOtrasAreas(dir_data);
         pause (debug_pausa);
     end
@@ -155,9 +155,9 @@ xlabel('Día');
 ylabel('Promedio NDVI');
 %xlim(limite);
 %ylim([0.35 0.8]);
-plot(arr_fecha(1,limite(1):limite(2)),arr_calidad_dia(1,limite(1):limite(2)),'b');
+plot(arr_fecha(1,limite(1):limite(2)),arr_calidad_dia(1,limite(1):limite(2)),'sb');
 hold on
-plot(arr_fecha(1,limite(1):limite(2)),arr_calidad_dia_premium(1,limite(1):limite(2)));
+plot(arr_fecha(1,limite(1):limite(2)),arr_calidad_dia_premium(1,limite(1):limite(2)),'sr');
 hold off
 legend( 'Calidad','Calidad premium');
 

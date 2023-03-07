@@ -1,4 +1,4 @@
-function  m_dibujarOtrasAreas(dir_data,titulo)
+function  m_dibujarOtrasAreas(dir_data)
     no_estados = ["09" "11" "13" "15" "16" "19" "21" "22" "24" "28" "29" "30"];
     hold on;
     
@@ -32,6 +32,4 @@ function  m_dibujarOtrasAreas(dir_data,titulo)
     
     hold off;
 
-    f = gcf;
-    exportgraphics(f,'D:\SOURCE\IMG\'+titulo+'.png','Resolution',300);
 end

@@ -1,5 +1,5 @@
 function [ndvi,evi,calidad,disponibilidad] = m_obtener_ndvi(dir_data,info,coord_1k_v6_inicio,coord_1k_v6_tam,coord_1k_v7_inicio,coord_1k_v7_tam)
-import matlab.io.hdfeos.*
+    import matlab.io.hdfeos.*
 
     gfid = gd.open( dir_data + "MOD13A2\061\" +info.v6);
     % indicar que requerimos los datos de MODIS
@@ -27,16 +27,16 @@ import matlab.io.hdfeos.*
     gd.detach(gridID);
     gd.close(gfid);
 
-    ndvi1(ndvi1<0)=nan;
-    evi1(evi1<0)=nan;
+    ndvi1(ndvi1<0)=0;
+    evi1(evi1<0)=0;
 
-    ndvi2(ndvi2<0)=nan;
-    evi2(evi2<0)=nan;
+    ndvi2(ndvi2<0)=0;
+    evi2(evi2<0)=0;
 
     ndvi = double([ndvi1 ndvi2]).*0.0001;
     evi = double([evi1 evi2]);
-
       
     calidad = double([calidad1 calidad2]);
     disponibilidad = double([disponibilidad1 disponibilidad2]);
+
 end

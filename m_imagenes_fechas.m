@@ -17,6 +17,7 @@ v6 = zeros(1,num_archivos/2) ;
 v7 = zeros(1,num_archivos/2) ;
 v6 = string(v6);
 v7 = string(v7);
+calidad = zeros(1,num_archivos/2) ;
 
 if(num_archivos > 0)
     for k = 1:2:num_archivos
@@ -26,11 +27,14 @@ if(num_archivos > 0)
         [dia(i),mes(i),estacion(i)] = m_mes_diaj(diaj(i),anio(i),dir_data);
         v6(i) = lista_archivos(k).name; 
         v7(i) = lista_archivos(k+1).name; 
+
+        
+        calidad(i) = -1;
         i=i+1;
 
     end
 
-    img_fechas = table(idx',diaj',dia',mes',estacion',anio',v6',v7','VariableNames',["idx","diaj","dia","mes","estacion","anio","v6","v7"]);
+    img_fechas = table(idx',diaj',dia',mes',estacion',anio',v6',v7',calidad','VariableNames',["idx","diaj","dia","mes","estacion","anio","v6","v7","Calidad"]);
 else
     warnig(">>>>> No hay imagenes disponibles");
 end
