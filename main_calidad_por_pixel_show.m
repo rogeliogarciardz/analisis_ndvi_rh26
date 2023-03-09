@@ -17,6 +17,15 @@ if elid=="ban_cpp"
     m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_completez,"Completez",0);
     m_dibujarOtrasAreas(dir_data);
 
+    %% mapa nubes y nieve
+
+    map_nubes_nieve = sum(arr_nubes_nieve,3,'omitnan') / filas * 100;
+    map_nubes_nieve(area_estudio==false)=nan;
+
+    figure;
+    m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_nubes_nieve,"Nubes y nieve",0);
+    m_dibujarOtrasAreas(dir_data);
+
     % %%% Disponibilidad
     % map_disponibilidad=m_mean_3dpp(arr_disponibilidad);
     %

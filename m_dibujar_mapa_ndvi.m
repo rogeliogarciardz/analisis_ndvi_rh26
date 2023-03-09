@@ -40,12 +40,18 @@ function m_dibujar_mapa_ndvi(lon_mapa,lat_mapa,lon,lat,ndvi,titulo,tipo)
             colormap(m_colmap('jet',256));
             c = colorbar;
             c.Label.String = "NDVI desv estandar";
-
+        case 3
+            colormap(ndvi_colormap);
+            c = colorbar;
+            c.Label.String = "NDVI 0-255";
     end
+    
+    %m_grid('box','fancy','grid','none','fontsize',10);
+    m_grid('linewi',2,'tickdir','out');
 
-    m_ruler([.05 .25],.1,4,'fontsize',7)
-
-
+    m_ruler([.05 .36],.1,3,'fontsize',7)
+    %m_northarrow(-101,23.5,.4,'type',2);
+    m_northarrow(-97.9,23.5,.4,'type',2);
 
     %dibuja el recuadro del mapa
     m_grid('linestyle','none','tickdir','out','linewidth',2);

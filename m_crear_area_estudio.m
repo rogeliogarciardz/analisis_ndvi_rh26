@@ -1,7 +1,8 @@
 function area_estudio = m_crear_area_estudio(archivo_kml,lat,lon)
     %% crear matriz solo de puntos dentro del area de estudio
     disp("Creando área de estudio!!!");
-    [~,R] = readgeoraster('boston.tif');
+    %[~,R] = readgeoraster('boston.tif');
+    [~,R] = readgeoraster('LC09_L2SP_026045_20230116_20230119_02_T1_SR_B7.TIF');
     proj = R.ProjectedCRS;
     proj.GeographicCRS.Name;
 
