@@ -26,24 +26,32 @@ coord_1k_v6_tam = [473 476];
 coord_1k_v7_inicio = [684 0];
 coord_1k_v7_tam = [473 115];
 
-%matriz que delimita el area de estudio
-%area_estudio = NaN;
-load area_estudio;
-
 %valor nulo
 fuera= 0;
 
 calidad_total_old = coord_1k_v6_tam(1) * (coord_1k_v6_tam(2)+coord_1k_v7_tam(2));
 %% obtener la info del área de estudio
-[lat,lon,ndvi] = m_zona_estudio(dir_data,coord_1k_v6_inicio,coord_1k_v6_tam,coord_1k_v7_inicio,coord_1k_v7_tam);
-img_fechas = m_imagenes_fechas(dir_data);
+[lat,lon,ndvi] = m_leer_dir_hdfs(dir_data,coord_1k_v6_inicio,coord_1k_v6_tam,coord_1k_v7_inicio,coord_1k_v7_tam);
+img_fechas = m_infohdfs2table(dir_data);
 
-%% obtener matriz 0,1 que delimitan el área de estudio
-if( numel(area_estudio) <= 1)
-    area_estudio = m_crear_area_estudio(dir_data+'KML\RH26.kml',lat,lon);
+%matriz que delimita el area de estudio
+ae = exist("area_estudio","var");
+if ae == 0
+    ae = exist("area_estudio.mat","file");
+    if ae == 2
+        disp(">>> Cargando área de estudio");
+        load area_estudio;
+    else
+        area_estudio = m_crear_area_estudio(dir_data+'KML\RH26.kml',lat,lon);
+    end
+else
+    if( numel(area_estudio) <= 1)
+        disp("La variable area_estudio sera sustituida");
+        area_estudio = m_crear_area_estudio(dir_data+'KML\RH26.kml',lat,lon);
+    end
 end
-ndvi(area_estudio==0)=NaN;
 
+ndvi(area_estudio==0)=NaN;
 calidad_total=sum(area_estudio,"all"); 
 
 % dibujatr mapa de prueba
@@ -150,17 +158,16 @@ legend( 'NDVI');
 
 
 figure;
-title('Calidad de imágen NDVI x día del 2000 al 2022');
+title('Imágen NDVI x día del 2000 al 2022');
 xlabel('Día');
-ylabel('Promedio NDVI');
+ylabel('% de pixeles');
 %xlim(limite);
 %ylim([0.35 0.8]);
 plot(arr_fecha(1,limite(1):limite(2)),arr_calidad_dia(1,limite(1):limite(2)),'sb');
 hold on
 plot(arr_fecha(1,limite(1):limite(2)),arr_calidad_dia_premium(1,limite(1):limite(2)),'sr');
 hold off
-legend( 'Calidad','Calidad premium');
-
+legend( 'Datos usables','Solo datos muy confiables','Location','southeast');
 
 
 disp("Promedio de calidad de las imagenes: ")

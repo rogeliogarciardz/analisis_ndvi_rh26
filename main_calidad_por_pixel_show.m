@@ -5,8 +5,8 @@ if elid=="ban_cpp"
     map_completez_premium(area_estudio==false)=nan;
 
     figure;
-    m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_completez_premium,"Completez premium",0);
-    m_dibujarOtrasAreas(dir_data);
+    m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_completez_premium,"Completez datos muy confiables",0);
+    m_dibujar_otras_areas(dir_data);
 
     %% mapa completez premium
 
@@ -14,8 +14,8 @@ if elid=="ban_cpp"
     map_completez(area_estudio==false)=nan;
 
     figure;
-    m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_completez,"Completez",0);
-    m_dibujarOtrasAreas(dir_data);
+    m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_completez,"Completez datos usables",0);
+    m_dibujar_otras_areas(dir_data);
 
     %% mapa nubes y nieve
 
@@ -23,8 +23,8 @@ if elid=="ban_cpp"
     map_nubes_nieve(area_estudio==false)=nan;
 
     figure;
-    m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_nubes_nieve,"Nubes y nieve",0);
-    m_dibujarOtrasAreas(dir_data);
+    m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_nubes_nieve,"Nubes y nieve por pixel",4);
+    m_dibujar_otras_areas(dir_data);
 
     % %%% Disponibilidad
     % map_disponibilidad=m_mean_3dpp(arr_disponibilidad);
@@ -43,14 +43,22 @@ if elid=="ban_cpp"
     h1=histogram(arr_ndvi,100);
     y = h1.Values;
 
-    dc = f_dcomb(x,y);
+    dc = f_deriv_comb(x,y);
 
     plot(x,y,"b",x,dc,"k-");
+   
 
     title('1da derivada histograma')
     xlabel('x')
-    ylabel("f(x)");
+    ylabel("f(x)"); 
+    ylim([-200000 2000000]);
+
     legend(["Histograma" "Derivada"],"Location","north");
+    hold on
+    line([50 50],[-200000 2000000]);
+    hold off
+
+  
 else
     disp("Ejecute el codigo que genera los datos");
 end

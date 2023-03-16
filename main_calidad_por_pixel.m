@@ -11,18 +11,27 @@ debug_dibujar_mapa_ndvi = false;  %dibujar los mapas con el ndvi
 %%Declarar las variables del proyecto
 declaraciones
 
-%matriz que delimita el area de estudio
-%area_estudio = NaN;
-load area_estudio;
 
 %calidad_total = coord_1k_v6_tam(1) * (coord_1k_v6_tam(2)+coord_1k_v7_tam(2));
 %% obtener la info del área de estudio
-[lat,lon,ndvi] = m_zona_estudio(dir_data,coord_1k_v6_inicio,coord_1k_v6_tam,coord_1k_v7_inicio,coord_1k_v7_tam);
-img_fechas = m_imagenes_fechas(dir_data);
+[lat,lon,ndvi] = m_leer_dir_hdfs(dir_data,coord_1k_v6_inicio,coord_1k_v6_tam,coord_1k_v7_inicio,coord_1k_v7_tam);
+img_fechas = m_infohdfs2table(dir_data);
 
-%% obtener matriz 0,1 que delimitan el área de estudio
-if( numel(area_estudio) <= 1)
-    area_estudio = m_crear_area_estudio(dir_data+'KML\CuencaPanucoGood.kml',lat,lon);
+%matriz que delimita el area de estudio
+ae = exist("area_estudio","var");
+if ae == 0
+    ae = exist("area_estudio.mat","file");
+    if ae == 2
+        disp(">>> Cargando área de estudio");
+        load area_estudio;
+    else
+        area_estudio = m_crear_area_estudio(dir_data+'KML\RH26.kml',lat,lon);
+    end
+else
+    if( numel(area_estudio) <= 1)
+        disp("La variable area_estudio sera sustituida");
+        area_estudio = m_crear_area_estudio(dir_data+'KML\RH26.kml',lat,lon);
+    end
 end
 
 ndvi(area_estudio==false)=NaN;
@@ -107,7 +116,7 @@ for i=1:filas
     if debug_dibujar_mapa_ndvi == true 
         % dibujar el mapa
         m_dibujar_mapa_ndvi(lon_proyeccion,lat_proyeccion,lon,lat,ndvi,"RH 26 ("+img_fechas_consulta.dia(i)+"/"+img_fechas_consulta.mes(i)+"/"+img_fechas_consulta.anio(i)+") C: "+calidad);
-        m_dibujarOtrasAreas(dir_data);
+        m_dibujar_otras_areas(dir_data);
         pause (debug_pausa);
     end
     

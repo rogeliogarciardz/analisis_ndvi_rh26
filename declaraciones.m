@@ -2,7 +2,6 @@
 
 disp(">>> Declarando variables...ok")
 
-global calidad_total;
 %directorio de datos
 dir_data = "D:\DATA\";
 
@@ -25,3 +24,9 @@ ndvi_tam = [473 591];
 
 calidad_total=0;
 elid="";
+
+% % NDVI colormap - 256 colors - values 0 to 1 like NASA
+ndvi_map_r = [ (33:80)  80*ones(1,79)  (80:-1:0)  zeros(1,48) ]' /80;  % red
+ndvi_map_g = flipud( ndvi_map_r );                                     % green
+ndvi_map_b = zeros( size( ndvi_map_r ) );                              % blue
+ndvi_colormap = [ ndvi_map_r  ndvi_map_g  ndvi_map_b ];

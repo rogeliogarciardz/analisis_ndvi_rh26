@@ -1,29 +1,30 @@
 %mostrar graficas y mapas
-disp("Promedio por año");
+disp("Promedio por año. Promedio, desv estamdar e indice de variación completo");
 
 if elid == "ban_pxa"
     m1 = m_mean_3dpp(arr_ndvi);
     m1std = m_std_3dpp(arr_ndvi);
+    m1cv = m1std./m1;
 
     figure;
 
     % dibujar el mapa del promedio de todos los años
-    m_dibujar_mapa_ndvi(lon_mapa,lat_mapa,lon,lat,m1,"RH 26",0);
-    m_dibujarOtrasAreas(dir_data);
+    m_dibujar_mapa_ndvi(lon_mapa,lat_mapa,lon,lat,m1,"NDVI promedio del 2000 al 2020",0);
+    m_dibujar_otras_areas(dir_data);
     %pause (debug_pausa);
 
     figure;
 
     % dibujar el mapa del promedio de todos los años
-    m_dibujar_mapa_ndvi(lon_mapa,lat_mapa,lon,lat,m1,"RH 26",1);
-    m_dibujarOtrasAreas(dir_data);
+    m_dibujar_mapa_ndvi(lon_mapa,lat_mapa,lon,lat,m1std,"Desviación estandar de NDVI del 2000 al 2020",2);
+    m_dibujar_otras_areas(dir_data);
     %pause (debug_pausa);
 
     figure;
 
     % dibujar el mapa de la desviación estandar
-    m_dibujar_mapa_ndvi(lon_mapa,lat_mapa,lon,lat,m1std,"RH 26",2);
-    m_dibujarOtrasAreas(dir_data);
+    m_dibujar_mapa_ndvi(lon_mapa,lat_mapa,lon,lat,m1cv,"Coeficiente de variacion de NDVI del 2000 al 2020",2);
+    m_dibujar_otras_areas(dir_data);
     %pause (debug_pausa);
 
     figure;
