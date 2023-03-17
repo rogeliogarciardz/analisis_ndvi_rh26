@@ -8,7 +8,7 @@ function [a0,a1,yajuste] = m_reglin(x,y)
         yajuste = a0+a1*x;
 
     else
-        error("Arreglos de diferente tamaño")
+        error("Arreglos de diferente tamaño") 
     end
     
 
