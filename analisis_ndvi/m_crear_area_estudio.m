@@ -11,8 +11,6 @@ function area_estudio = m_crear_area_estudio(archivo_kml,lat,lon)
 
     [xlat,ylon] = projfwd(proj,lat,lon);
     area_estudio = inpolygon(xlat,ylon,x,y);
-
-    %area_estudio = double(p);
 end
 
     
