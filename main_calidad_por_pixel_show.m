@@ -6,25 +6,38 @@ if elid=="ban_cpp"
 
     figure;
     m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_completez_premium,"Completez datos muy confiables",0);
-    m_dibujar_otras_areas(dir_data);
+    m_dibujar_kml(dir_data,"RH26",1,"b","RH26");
+
+    %m_dibujar_otras_areas(dir_data);
+
+    ax = gca;
+    exportgraphics(ax,"img/completez_muy_confiable.png",'Resolution',300) 
 
     %% mapa completez premium
 
     map_completez = sum(arr_completez,3,'omitnan') / filas * 100;
     map_completez(area_estudio==false)=nan;
-
+    
     figure;
     m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_completez,"Completez datos usables",0);
-    m_dibujar_otras_areas(dir_data);
+    m_dibujar_kml(dir_data,"RH26",1,"b","RH26");
 
+    %m_dibujar_otras_areas(dir_data);
+
+      ax = gca;
+    exportgraphics(ax,"img/completez_usables.png",'Resolution',300) 
     %% mapa nubes y nieve
 
     map_nubes_nieve = sum(arr_nubes_nieve,3,'omitnan') / filas * 100;
     map_nubes_nieve(area_estudio==false)=nan;
 
     figure;
-    m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_nubes_nieve,"Nubes y nieve por pixel",4);
-    m_dibujar_otras_areas(dir_data);
+    m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,map_nubes_nieve,"Nubes y nieve por pixel",5);
+    %m_dibujar_otras_areas(dir_data);
+    m_dibujar_kml(dir_data,"RH26",1,"b","RH26");
+
+      ax = gca;
+    exportgraphics(ax,"img/nubes_y_nieve.png",'Resolution',300) 
 
     % %%% Disponibilidad
     % map_disponibilidad=m_mean_3dpp(arr_disponibilidad);
@@ -37,26 +50,26 @@ if elid=="ban_cpp"
     %
     %
     %% histograma y 1a derivada
-
-    figure;
-    x=1:100;
-    h1=histogram(arr_ndvi,100);
-    y = h1.Values;
-
-    dc = f_deriv_comb(x,y);
-
-    plot(x,y,"b",x,dc,"k-");
-   
-
-    title('1da derivada histograma')
-    xlabel('x')
-    ylabel("f(x)"); 
-    ylim([-200000 2000000]);
-
-    legend(["Histograma" "Derivada"],"Location","north");
-    hold on
-    line([50 50],[-200000 2000000]);
-    hold off
+% 
+%     figure;
+%     x=1:100;
+%     h1=histogram(arr_ndvi,100);
+%     y = h1.Values;
+% 
+%     dc = f_deriv_comb(x,y);
+% 
+%     plot(x,y,"b",x,dc,"k-");
+%    
+% 
+%     title('1da derivada histograma')
+%     xlabel('x')
+%     ylabel("f(x)"); 
+%     ylim([-200000 2000000]);
+% 
+%     legend(["Histograma" "Derivada"],"Location","north");
+%     hold on
+%     line([50 50],[-200000 2000000]);
+%     hold off
 
   
 else

@@ -16,6 +16,7 @@ lat_mapa = [ 18.7  24.3];
 %cuadrante de inicio y tamaño del area de estudio
 coord_1k_v6_inicio = [684 724];
 coord_1k_v6_tam = [473 476];
+
 %h08v06
 coord_1k_v7_inicio = [684 0];
 coord_1k_v7_tam = [473 115];

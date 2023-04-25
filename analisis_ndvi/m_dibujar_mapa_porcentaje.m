@@ -23,6 +23,8 @@ function m_dibujar_mapa_porcentaje(lon_mapa,lat_mapa,lon,lat,datos,titulo,tipo)
 
        case  4
             m_dibujar_mapa(lon_mapa,lat_mapa,lon,lat,datos,titulo,[0 50],flipud(m_colmap('jet',10)),"Porcentaje(%)");
+        case 5
+            m_dibujar_mapa(lon_mapa,lat_mapa,lon,lat,datos,titulo,[0 50],m_colmap('jet',10),"Porcentaje(%)");
 
     end
     

@@ -13,6 +13,9 @@ if elid == "ban_pxa"
     m_dibujar_otras_areas(dir_data);
     %pause (debug_pausa);
 
+     ax = gca;
+    exportgraphics(ax,"img/promedio.png",'Resolution',300) 
+
     figure;
 
     % dibujar el mapa del promedio de todos los años
@@ -20,6 +23,8 @@ if elid == "ban_pxa"
     m_dibujar_otras_areas(dir_data);
     %pause (debug_pausa);
 
+     ax = gca;
+    exportgraphics(ax,"img/desviacion.png",'Resolution',300) 
     figure;
 
     % dibujar el mapa de la desviación estandar
