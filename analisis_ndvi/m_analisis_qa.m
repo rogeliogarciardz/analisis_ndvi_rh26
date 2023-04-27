@@ -1,0 +1,46 @@
+%% Funcion para analizar la calidad de la serie de tiempo por pixel
+% Analiza la serie de tiempo de un pixel
+% 1.- Remueve los pixeles que no son buenos o no estan disponibles
+% 2.- Cuenta el numero y tamaño de los huecos de la serie de tiempo
+% 3.- Interpola linealmente los datos faltantes
+% 4.- Analiza las 2 series para saber si son iguale o diferentes
+
+function [val_rmse,val_mae,val_corr,huecos,pje_huecos,data_n] = m_analisis_qa(data,qa)
+    
+    tam = length(data);
+    data2 = data;
+
+    % eliminar datos de mala calidad
+    data2(qa ~= 0 & qa ~= 1)=nan;
+    
+    % contar el numero de huecos
+    num_nan = zeros(1,tam);
+    cnan=0;
+    for i=1:tam
+        if(isnan(data2(i)))
+           cnan=cnan+1; 
+        elseif(cnan>0)
+            num_nan(cnan)=num_nan(cnan)+1;
+            cnan=0;
+        end
+    end
+
+    %contar huecos
+    total_huecos = sum(num_nan);
+    huecos = num_nan(1)+num_nan(2)*100+num_nan(3)*10000+num_nan(4)*1000000;
+    pje_huecos = total_huecos/tam;
+
+%     if(num_nan(1)>0)
+%         %interpolar linealmente
+        data_n = fillmissing(data2,'linear');    
+%     elseif(num_nan(2)>0)
+% 
+%     elseif(num_nan(3)>0)
+%     elseif(num_nan(4)>0)
+%     end
+
+    val_rmse = rmse(data,data_n);
+    val_mae = mean(abs(data-data_n));
+    val_corr = corrcoef(data,data_n);
+    val_corr = val_corr(2,1);
+end
