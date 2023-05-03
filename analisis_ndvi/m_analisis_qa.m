@@ -5,8 +5,10 @@
 % 3.- Interpola linealmente los datos faltantes
 % 4.- Analiza las 2 series para saber si son iguale o diferentes
 
-function [val_rmse,val_mae,val_corr,huecos,pje_huecos,data_n] = m_analisis_qa(data,qa)
+function [val_rmse,val_mae,val_corr,num_huecos,pje_huecos,histo_huecos,data_n] = m_analisis_qa(data,qa)
     
+    num_huecos = 0;
+
     tam = length(data);
     data2 = data;
 
@@ -19,25 +21,17 @@ function [val_rmse,val_mae,val_corr,huecos,pje_huecos,data_n] = m_analisis_qa(da
     for i=1:tam
         if(isnan(data2(i)))
            cnan=cnan+1; 
-        elseif(cnan>0)
+           num_huecos=num_huecos+1;
+        elseif(cnan>0 && cnan<5)
             num_nan(cnan)=num_nan(cnan)+1;
             cnan=0;
         end
     end
 
-    %contar huecos
-    total_huecos = sum(num_nan);
-    huecos = num_nan(1)+num_nan(2)*100+num_nan(3)*10000+num_nan(4)*1000000;
-    pje_huecos = total_huecos/tam;
+    histo_huecos = num_nan(1)+num_nan(2)*100+num_nan(3)*10000+num_nan(4)*1000000;
+    pje_huecos = num_huecos/tam;
 
-%     if(num_nan(1)>0)
-%         %interpolar linealmente
-        data_n = fillmissing(data2,'linear');    
-%     elseif(num_nan(2)>0)
-% 
-%     elseif(num_nan(3)>0)
-%     elseif(num_nan(4)>0)
-%     end
+    data_n = fillmissing(data2,'linear');    
 
     val_rmse = rmse(data,data_n);
     val_mae = mean(abs(data-data_n));
