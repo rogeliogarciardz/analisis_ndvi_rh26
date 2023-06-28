@@ -34,7 +34,7 @@ function [ndvi,evi,calidad,disponibilidad] = m_obtener_ndvi(dir_data,info,coord_
     evi2(evi2<0)=0;
 
     ndvi = double([ndvi1 ndvi2]).*0.0001;
-    evi = double([evi1 evi2]);
+    evi = double([evi1 evi2]).*0.0001;
       
     calidad = double([calidad1 calidad2]);
     disponibilidad = double([disponibilidad1 disponibilidad2]);

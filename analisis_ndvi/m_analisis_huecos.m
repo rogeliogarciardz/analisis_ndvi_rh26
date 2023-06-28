@@ -5,12 +5,25 @@
 % 3.- Interpola linealmente los datos faltantes
 % 4.- Analiza las 2 series para saber si son iguale o diferentes
 
-function [num_huecos,pje_huecos] = m_analisis_huecos(data,qa)
+function [num_huecos,pje_huecos,histo_huecos,num_nan] = m_analisis_huecos(data)
+        tam = length(data);
+        data2 = data;
+              
+        % contar el numero de huecos
+        num_nan = zeros(1,tam);
+        cnan=0;
+        for i=1:tam
+            if(isnan(data2(i)))
+               cnan=cnan+1; 
+            elseif(cnan>0 && cnan<5)
+                num_nan(cnan)=num_nan(cnan)+1;
+                cnan=0;
+            end
+        end
+    
+        histo_huecos = num_nan(1)+num_nan(2)*100+num_nan(3)*10000+num_nan(4)*1000000;
 
-        % eliminar datos de mala calidad
-        data(qa ~= 0 & qa ~= 1)=nan;
         num_huecos = sum(isnan(data));
         pje_huecos = num_huecos/length(data);
-    
-        
+       
 end

@@ -1,4 +1,4 @@
-function m_dibujar_mapa(lon_mapa,lat_mapa,lon,lat,datos,titulo,pclim,ppcolor,plabel)
+function m_dibujar_mapa(lon_mapa,lat_mapa,lon,lat,datos,~,pclim,ppcolor,plabel)
     %% dibujar mapa ndvi proyeccion mercator 
     m_proj('mercator','long',lon_mapa,'lat',lat_mapa);
 
@@ -28,6 +28,6 @@ function m_dibujar_mapa(lon_mapa,lat_mapa,lon,lat,datos,titulo,pclim,ppcolor,pla
     % Estrella del norte 
     m_northarrow(-97.9,23.5,.4,'type',2);
 
-    title(titulo);
+    %title(titulo);
     
 end
