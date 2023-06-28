@@ -188,10 +188,11 @@ arr_calidad_mes = arr_calidad_mes./arr_dias_por_mes;
 
 figure;
 bar(arr_calidad_mes);
-title('Calidad de imágenes promedio x mes')
+%title('Calidad de imágenes promedio x mes')
 xlabel('Mes')
-ylabel('% de calidad')
+ylabel('% nubes')
 ylim([80 100]);
 xticks(1:12)
 xticklabels(["Enero" "Febrero"  "Marzo" "Abril" "Mayo" "Junio" "Julio" "Agosto" "Septiembre" "Octubre" "Noviembre" "Diciembre"])
-
+ax = gca;
+ax.FontSize=18; 
